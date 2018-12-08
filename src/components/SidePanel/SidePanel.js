@@ -6,6 +6,7 @@ import Channels from "./Channels";
 class SidePanel extends Component {
   render() {
     const { currentUser } = this.props;
+
     return (
       <Menu
         size="large"
