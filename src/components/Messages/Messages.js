@@ -41,15 +41,21 @@ class Messages extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.removeListeners(this.state.listeners);
+    this.state.connectedRef.off();
+  }
+
+  removeListeners = listeners => {
+    listeners.forEach(listener => {
+      listener.ref.child(listener.id).off(listener.event);
+    });
+  };
+
   componentDidUpdate(prevProps, prevState) {
     if (this.messagesEnd) {
       this.scrollToBottom();
     }
-  }
-
-  componentWillUnmount() {
-    this.removeListeners(this.state.listeners);
-    this.state.connectedRef.off();
   }
 
   addToListeners = (id, ref, event) => {
@@ -63,12 +69,6 @@ class Messages extends Component {
       const newListener = { id, ref, event };
       this.setState({ listeners: this.state.listeners.concat(newListener) });
     }
-  };
-
-  removeListeners = listeners => {
-    listeners.forEach(listener => {
-      listeners.ref.child(listener.id).off(listener.event);
-    });
   };
 
   scrollToBottom = () => {
