@@ -32,7 +32,11 @@ class MessageForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
-  handleKeyDown = () => {
+  handleKeyDown = event => {
+    if (event.ctrlKey && event.keyCode === 13) {
+      this.sendMessage();
+    }
+
     const { message, typingRef, channel, user } = this.state;
     if (message) {
       typingRef
@@ -230,7 +234,7 @@ class MessageForm extends Component {
               ? "error"
               : ""
           }
-          placeholder="Message?"
+          placeholder="Message? To send message faster - ctrl + enter!"
         />
         <Button.Group icon widths="2">
           <Button
