@@ -11,8 +11,9 @@ body,
 }
 
 .messages {
-  height: 67vh;
+  height: 65vh;
   overflow-y: scroll;
+  max-width: none;
 }
 
 .message__form {

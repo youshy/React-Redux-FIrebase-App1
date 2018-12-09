@@ -172,7 +172,7 @@ class Messages extends Component {
         />
 
         <Segment>
-          <Comment.Group className="messages">
+          <Comment.Group className="messages" style={{ maxWidth: "none" }}>
             {searchTerm
               ? this.displayMessages(searchResults)
               : this.displayMessages(messages)}
