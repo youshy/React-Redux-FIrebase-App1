@@ -45,7 +45,7 @@ class Messages extends Component {
 
   addTypingListeners = channelId => {
     let typingUsers = [];
-    this.state.typingRef.child(channelId).onDisconnect("child_added", snap => {
+    this.state.typingRef.child(channelId).on("child_added", snap => {
       if (snap.key !== this.state.user.uid) {
         typingUsers = typingUsers.concat({
           id: snap.key,
@@ -57,7 +57,7 @@ class Messages extends Component {
       }
     });
 
-    this.stateTypingRef.child(channelId).on("child_removed", snap => {
+    this.state.typingRef.child(channelId).on("child_removed", snap => {
       const index = typingUsers.findIndex(user => user.id === snap.key);
       if (index !== -1) {
         typingUsers = typingUsers.filter(user => user.id !== snap.key);
